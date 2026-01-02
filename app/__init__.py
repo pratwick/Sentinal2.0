@@ -26,7 +26,7 @@ def create_app():
     # Flask-Chaching Configuration
     app.config['CACHE_TYPE'] = os.getenv("CACHE_TYPE")
     app.config['CACHE_REDIS_URL'] = os.getenv('CACHE_REDIS_URL')
-    app.configp['CACHE_REDIS_PORT'] = os.getenv("CACHE_REDIS_PORT")
+    app.config['CACHE_REDIS_PORT'] = os.getenv("CACHE_REDIS_PORT")
     app.config['CACHE_DEFAULT_TIMEOUT'] = os.getenv('CACHE_DEFAULT_TIMEOUT')
     db.init_app(app) # This line connects db to the Flask app, after this db knows which app to use, 
                   # Hey db, this is the Flask app you should work with.
