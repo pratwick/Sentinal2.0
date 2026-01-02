@@ -1,3 +1,3 @@
 #!/bin/bash
-pip install requirements.txt
+pip install -r requirements.txt
 pytest test_sentiments.py
