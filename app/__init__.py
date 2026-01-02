@@ -5,10 +5,8 @@ from flask_cors import CORS
 # Imports the SQLAlchemy class
 # This class knows how to: Connect to a database, Create tables, Insert and read data
 from flask_sqlalchemy import SQLAlchemy
-from dotenv import load_dotenv
 import os
 
-load_dotenv()
 # Creates one database manager object
 # Is not connected to any app yet
 # Think db as database engine that is waiting to be connected
@@ -21,12 +19,15 @@ cache = Cache() # Cache is initialize with the Cache class
 def create_app():
     app = Flask(__name__, instance_relative_config=True)
     CORS(app)
+    # SQLAlchemy Configuration
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # we dont want versioning as of now so we can concentrate on the entire code itself
                                                          # But you can create the versioning and track the modification when we are dealing with the bigger application
-    app.config['CACHE_TYPE'] = "redis"
+    # Flask-Chaching Configuration
+    app.config['CACHE_TYPE'] = os.getenv("CACHE_TYPE")
     app.config['CACHE_REDIS_URL'] = os.getenv('CACHE_REDIS_URL')
-    app.config['CACHE_DEFAULT_TIMEOUT'] = int(os.getenv('CACHE_DEFAULT_TIMEOUT', 3600))
+    app.configp['CACHE_REDIS_PORT'] = os.getenv("CACHE_REDIS_PORT")
+    app.config['CACHE_DEFAULT_TIMEOUT'] = os.getenv('CACHE_DEFAULT_TIMEOUT')
     db.init_app(app) # This line connects db to the Flask app, after this db knows which app to use, 
                   # Hey db, this is the Flask app you should work with.
     cache.init_app(app) # For the cache also you will initialize this app
