@@ -5,9 +5,10 @@ from flask_cors import CORS
 # Imports the SQLAlchemy class
 # This class knows how to: Connect to a database, Create tables, Insert and read data
 from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
 import os
 
-
+load_dotenv()
 # Creates one database manager object
 # Is not connected to any app yet
 # Think db as database engine that is waiting to be connected
