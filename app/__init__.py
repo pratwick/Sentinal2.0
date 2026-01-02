@@ -24,10 +24,9 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # we dont want versioning as of now so we can concentrate on the entire code itself
                                                          # But you can create the versioning and track the modification when we are dealing with the bigger application
-    app.config['CACHE_TYPE'] = os.getenv('CACHE_TYPE')
+    app.config['CACHE_TYPE'] = "redis"
     app.config['CACHE_REDIS_URL'] = os.getenv('CACHE_REDIS_URL')
-    app.config['CACHE_REDIS_PORT'] = os.getenv('CACHE_REDIS_PORT')
-    app.config['CACHE_DEFAULT_TIMEOUT'] = os.getenv('CACHE_DEFAULT_TIMEOUT')
+    app.config['CACHE_DEFAULT_TIMEOUT'] = int(os.getenv('CACHE_DEFAULT_TIMEOUT', 3600))
     db.init_app(app) # This line connects db to the Flask app, after this db knows which app to use, 
                   # Hey db, this is the Flask app you should work with.
     cache.init_app(app) # For the cache also you will initialize this app
